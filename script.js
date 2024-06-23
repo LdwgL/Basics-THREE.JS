@@ -1,5 +1,6 @@
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js'
+import { OrbitControls } from "https://esm.sh/three/examples/jsm/controls/OrbitControls.js";
+import { calcBSplineDerivatives } from 'three/examples/jsm/curves/NURBSUtils.js';
 // Add Scene
 
 const scene = new THREE.Scene()
@@ -21,6 +22,34 @@ const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
 scene.add(ambientLight);
 scene.add(mesh)
 scene.add(light)
+
+// Particles
+
+const particlesGeometry = new THREE.BufferGeometry();
+const particlesCount = 50000;
+const positions = new Float32Array(particlesCount * 3);
+
+for (let i = 0; i < particlesCount * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
+}
+
+
+
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+const particlesMaterial = new THREE.PointsMaterial({
+    color: 0x62fff,
+    size: 0.010,
+});
+
+ 
+
+const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particles);
+
+function animate() {
+    requestAnimationFrame(animate);
+}
 
 camera.position.set(0, 0, 2)
 light.position.set(0,3, 3)
@@ -44,3 +73,5 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
+

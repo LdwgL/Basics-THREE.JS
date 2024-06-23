@@ -1,6 +1,5 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js'
 import { OrbitControls } from "https://esm.sh/three/examples/jsm/controls/OrbitControls.js";
-import { calcBSplineDerivatives } from 'three/examples/jsm/curves/NURBSUtils.js';
 // Add Scene
 
 const scene = new THREE.Scene()

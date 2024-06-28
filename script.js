@@ -16,7 +16,8 @@ const mesh = new THREE.Mesh(geometry, material)
 //Light for the Mesh
 const light = new THREE.PointLight(0xeeeeee)
 
-const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+const ambientLight = new THREE.DirectionalLight(0x404040); // soft white light
+
 
 scene.add(ambientLight);
 scene.add(mesh)
@@ -50,6 +51,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+
 camera.position.set(0, 0, 2)
 light.position.set(0,3, 3)
 
@@ -63,6 +65,8 @@ function loop(){
     requestAnimationFrame(loop)
     mesh.rotation.y += 0.01
     mesh.rotation.x += 0.005
+    particles.rotation.x += 0.010
+    particles.rotation.y += 0.010
 
 renderer.render(scene, camera)
 }

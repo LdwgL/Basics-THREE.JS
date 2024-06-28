@@ -10,6 +10,11 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 // Add Mesh
 const material = new THREE.MeshPhongMaterial({ color:0xffffff })
 
+ // Charger la texture
+const loader = new THREE.TextureLoader();
+loader.load('assets/star.jpg', function(texture) {
+    scene.background = texture;
+});
 
 
 const mesh = new THREE.Mesh(geometry, material)
@@ -38,7 +43,7 @@ for (let i = 0; i < particlesCount * 3; i++) {
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 const particlesMaterial = new THREE.PointsMaterial({
-    color: 0x62fff,
+    color: 0xFFFF00,
     size: 0.010,
 });
 

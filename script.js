@@ -1,42 +1,62 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js'
 import { OrbitControls } from "https://esm.sh/three/examples/jsm/controls/OrbitControls.js";
 // Add Scene
-
 const scene = new THREE.Scene()
-// Add Camera
-const camera = new THREE.PerspectiveCamera(70, iw / ih)
-// Add Geometry
-const geometry = new THREE.SphereGeometry(0.5, 32, 32)
 
-const grid = new THREE.GridHelper(20,20);
+// Create the Camera
+
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 50;
+
+// Add Axes 
+
+const axesHelper =  new THREE.AxesHelper(3);
+    scene.add(axesHelper);
+    camera.position.set(0, 2, 5);
+    camera.position.z = 5;
+    camera.position.y = 2;
+
+// ----- The Cube -----//
+
+const cube = new THREE.BoxGeometry();
+const boxMaterial = new THREE.MeshNormalMaterial
+({color:0xFFFF,});
+
+const box = new THREE.Mesh(cube, boxMaterial);
+scene.add(box);
+// ---- The Sphere -----//
+
+const geometry = new THREE.SphereGeometry(3,50, 44 )
+// Add Mesh
+
+const material = new THREE.MeshNormalMaterial({ 
+    wireframe: true,
+})
+//----- The Grid ------ //
+const grid = new THREE.GridHelper(30, 10);
 scene.add(grid);
 
-// Add Mesh
-const material = new THREE.MeshNormalMaterial({ 
-    color:0xfff ,
-    metalness: 0.001
-})
-
- // Charger la texture
+ // Load the Texture
 const loader = new THREE.TextureLoader();
 loader.load('assets/star.jpg', function(texture) {
     scene.background = texture;
 });
-
 
 const mesh = new THREE.Mesh(geometry, material)
 //Light for the Mesh
 const light = new THREE.PointLight(0xeeeeee)
 
 const ambientLight = new THREE.DirectionalLight(0x404040); // soft white light
-
-
-scene.add(ambientLight);
 scene.add(mesh)
+scene.add(ambientLight);
 scene.add(light)
 
-// Particles
+mesh.position.set(-10, 5, 0);
+box.position.set(-10,5,0)
 
+
+
+// Particles
 const particlesGeometry = new THREE.BufferGeometry();
 const particlesCount = 150000;
 const positions = new Float64Array(particlesCount * 15);
@@ -55,7 +75,7 @@ const particlesMaterial = new THREE.PointsMaterial({
 
 
 const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
+// scene.add(particles);
 
 camera.position.set(0, 0, 2)
 light.position.set(0,3, 3)
@@ -64,14 +84,26 @@ const renderer = new THREE.WebGLRenderer({ canvas })
 // Add Controls for Moving the Camera
 const controls = new OrbitControls(camera, renderer.domElement);
 
+let step = 0;
+let speed = 0.01;
+
 // Boucle animation
 loop()
 function loop(){
     requestAnimationFrame(loop)
-    mesh.rotation.y += 0.01
-    mesh.rotation.x += 0.005
+    mesh.rotation.y += 0.010
+    mesh.rotation.x += 0.010
+    box.rotation.y += 0.010
+    box.rotation.x += 0.010
+    step += speed;
+    // Mise à jour de la position y du cube pour créer une oscillation
+    mesh.position.y = 10 * Math.abs(Math.sin(step));
+    box.position.y = 10 * Math.abs(Math.sin(step));
     particles.rotation.x += 0.010
     particles.rotation.y += 0.010
+    
+
+    
 
 renderer.render(scene, camera)
 }

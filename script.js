@@ -28,7 +28,7 @@ const material = new THREE.MeshNormalMaterial({ wireframe: true });
 const mesh = new THREE.Mesh(geometry, material);
 
 //----- The Grid ------ //
-const grid = new THREE.GridHelper(30, 10);
+const grid = new THREE.GridHelper(30, 10, 0xffffff, 0xffffff);
 scene.add(grid);
 
 // Load the Texture
@@ -104,10 +104,10 @@ function loop() {
     particles.rotation.x += 0.010;
     particles.rotation.y += 0.010;
 
-    const oscillationHeight = 5; // Height of the oscillation to ensure it stays above the grid
-    mesh.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
-    box.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
-    cylinder.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
+    const oscillationHeight = 4; // Height of the oscillation to ensure it stays above the grid
+    mesh.position.y = oscillationHeight + 6 * Math.abs(Math.sin(step));
+    box.position.y = oscillationHeight + 6 * Math.abs(Math.sin(step));
+    cylinder.position.y = oscillationHeight + 6 * Math.abs(Math.sin(step));
     renderer.render(scene, camera);
 }
 

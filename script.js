@@ -6,16 +6,21 @@ const scene = new THREE.Scene()
 // Add Camera
 const camera = new THREE.PerspectiveCamera(70, iw / ih)
 // Add Geometry
-const geometry = new THREE.BoxGeometry(1, 1, 1)
+const geometry = new THREE.SphereGeometry(0.5, 32, 32)
+
+const grid = new THREE.GridHelper(20,20);
+scene.add(grid);
 
 // Add Mesh
-const material = new THREE.MeshPhongMaterial({ color:0xffffff })
+const material = new THREE.MeshNormalMaterial({ 
+    color:0xfff ,
+    metalness: 0.001
+})
 
  // Charger la texture
 const loader = new THREE.TextureLoader();
 loader.load('assets/star.jpg', function(texture) {
     scene.background = texture;
-    scene.background.offset.x -= 0.001;
 });
 
 
@@ -40,12 +45,12 @@ for (let i = 0; i < particlesCount * 5; i++) {
     positions[i] = (Math.random() - 0.5) * 10;
 }
 
-
 particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
 const particlesMaterial = new THREE.PointsMaterial({
     color: 0xFFFF00, 
     size: 0.020,
+
 });
 
 

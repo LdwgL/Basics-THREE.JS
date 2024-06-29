@@ -56,7 +56,11 @@ const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
 cylinder.position.set(10, 5, 0); // Position the cylinder
 scene.add(cylinder);
 
-// Particles
+// -- The Star ---- //
+
+
+
+// ---- Particles ----- //
 const particlesGeometry = new THREE.BufferGeometry();
 const particlesCount = 150000;
 const positions = new Float64Array(particlesCount * 15);
@@ -101,12 +105,35 @@ function loop() {
     box.position.y = 10 * Math.abs(Math.sin(step));
 
     cylinder.position.y = 10 * Math.abs(Math.sin(step)); // Oscillate the cylinder
-
     particles.rotation.x += 0.010;
     particles.rotation.y += 0.010;
 
+    const oscillationHeight = 5; // Height of the oscillation to ensure it stays above the grid
+    mesh.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
+    box.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
+    cylinder.position.y = oscillationHeight + 5 * Math.abs(Math.sin(step));
+
     renderer.render(scene, camera);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;

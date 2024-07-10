@@ -55,6 +55,7 @@ const ambientLight = new THREE.DirectionalLight(0x404040); // soft white light
 scene.add(ambientLight);
 scene.add(light);
 
+// Positions --- //
 mesh.position.set(-10, 5, 0);
 box.position.set(-10, 5, 0);
 
@@ -76,6 +77,16 @@ const material2 = new THREE.MeshNormalMaterial({
 const torus = new THREE.Mesh(starGeometry, material2);
 scene.add(torus);
 torus.position.set(2, 7, -10);
+
+// -- The Triangle --- //
+
+const geometry2 = new THREE.TorusKnotGeometry(8, 2, 100, 9);
+const material3 = new THREE.MeshNormalMaterial({
+  wireframe: true,
+});
+const torusKnot = new THREE.Mesh(geometry2, material3);
+torusKnot.position.set(0, 15, 30);
+scene.add(torusKnot);
 
 // Particles
 const particlesGeometry = new THREE.BufferGeometry();
@@ -134,7 +145,7 @@ fontLoader.load(
 
     const textMaterial = new THREE.MeshNormalMaterial();
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-    textMesh.position.set(0, 5, -5); // Adjust the position as needed
+    textMesh.position.set(0, 5, -15); // Adjust the position as needed
     scene.add(textMesh);
   }
 );
@@ -149,6 +160,8 @@ function loop() {
   box.rotation.x += 0.01;
   torus.rotation.x += 0.01;
   torus.rotation.y += 0.01;
+  torusKnot.rotation.y += 0.01;
+  torusKnot.rotation.x += 0.01;
   cylinder.rotation.y += 0.01; // Rotate the cylinder
   cylinder.rotation.x += 0.05; // Rotate the cylinder
   controls.update();

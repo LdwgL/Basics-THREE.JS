@@ -1,35 +1,33 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shader ThreeJS</title>
     <script type="module">
-        
-        window.canvas = document.getElementById('canvas')
-        window.canvas.width = innerWidth
-        window.canvas.height = innerHeight
-        window.iw = innerWidth
-        window.ih = innerHeight
+      window.canvas = document.getElementById("canvas");
+      window.canvas.width = innerWidth;
+      window.canvas.height = innerHeight;
+      window.iw = innerWidth;
+      window.ih = innerHeight;
     </script>
     <script src="script.js" type="module"></script>
+    <script src="https://threejs.org/examples/js/loaders/FontLoader.js"></script>
 
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;/* Pour empêcher le défilement de la page */
-        }
-        canvas {
-            display: block;
-            width: 100vw;
-            height: 100vh;
-        }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Pour empêcher le défilement de la page */
+      }
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
-    
-</head>
-<body>
-   <canvas id="canvas">
-    
-   </canvas>
-</body>
+  </head>
+  <body>
+    <canvas id="canvas"> </canvas>
+  </body>
 </html>

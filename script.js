@@ -68,6 +68,7 @@ scene.add(cylinder);
 
 const starGeometry = new THREE.TorusGeometry(6, 1, 10, 50);
 const material2 = new THREE.MeshNormalMaterial({
+  wireframe: true,
   color: 0xffff00,
 });
 
@@ -103,6 +104,10 @@ camera.position.set(0, 30, -10 - 20);
 const renderer = new THREE.WebGLRenderer({ canvas });
 // Add Controls for Moving the Camera
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.autoRotate = true;
+controls.autoRotateSpeed = -0.5;
+controls.target.set(0, 0.2, 0);
+controls.update();
 
 let step = 0;
 let speed = 0.01;
@@ -119,6 +124,7 @@ function loop() {
   torus.rotation.y += 0.01;
   cylinder.rotation.y += 0.01; // Rotate the cylinder
   cylinder.rotation.x += 0.05; // Rotate the cylinder
+  controls.update();
   step += speed;
 
   // Mise à jour de la position y du cube pour créer une oscillation

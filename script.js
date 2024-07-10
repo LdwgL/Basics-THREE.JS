@@ -1,6 +1,7 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js";
 import { OrbitControls } from "https://esm.sh/three/examples/jsm/controls/OrbitControls.js";
-
+import { FontLoader } from "https://esm.sh/three/examples/jsm/loaders/FontLoader.js";
+import { TextGeometry } from "https://esm.sh/three/examples/jsm/geometries/TextGeometry.js";
 // Add Scene
 export const scene = new THREE.Scene();
 
@@ -111,6 +112,32 @@ controls.update();
 
 let step = 0;
 let speed = 0.01;
+
+// -- Create the Text with FontLoader & TextGeometry --- //
+
+const fontLoader = new FontLoader();
+fontLoader.load(
+  "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
+  function (font) {
+    const textGeometry = new TextGeometry("Welcome, to my project !", {
+      font: font,
+      size: 3,
+      height: 0.5,
+      wireframe: true,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 0.02,
+      bevelSize: 0.02,
+      bevelOffset: 0,
+      bevelSegments: 5,
+    });
+
+    const textMaterial = new THREE.MeshNormalMaterial();
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    textMesh.position.set(0, 5, -5); // Adjust the position as needed
+    scene.add(textMesh);
+  }
+);
 
 // Boucle animation
 loop();

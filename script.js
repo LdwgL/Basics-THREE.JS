@@ -130,9 +130,25 @@ const fontLoader = new FontLoader();
 fontLoader.load(
   "https://threejs.org/examples/fonts/helvetiker_regular.typeface.json",
   function (font) {
-    const textGeometry = new TextGeometry("Welcome, to my project !", {
+    const textGeometry = new TextGeometry(
+      "Welcome, to my project ! \n Basics THREE.JS \n make by LdwgL",
+      {
+        font: font,
+        size: 2,
+        height: 1,
+        wireframe: true,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.1,
+        bevelSize: 0.01,
+        bevelOffset: 0,
+        bevelSegments: 5,
+      }
+    );
+
+    const textGeometry3 = new TextGeometry("Basics THREEJS", {
       font: font,
-      size: 3,
+      size: 2,
       height: 0.5,
       wireframe: true,
       curveSegments: 12,
@@ -145,7 +161,7 @@ fontLoader.load(
 
     const textMaterial = new THREE.MeshNormalMaterial();
     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-    textMesh.position.set(0, 5, -15); // Adjust the position as needed
+    textMesh.position.set(0, 10, -20); // Adjust the position as needed
     scene.add(textMesh);
   }
 );

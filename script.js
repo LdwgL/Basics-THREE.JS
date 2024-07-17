@@ -2,8 +2,13 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.m
 import { OrbitControls } from "https://esm.sh/three/examples/jsm/controls/OrbitControls.js";
 import { FontLoader } from "https://esm.sh/three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "https://esm.sh/three/examples/jsm/geometries/TextGeometry.js";
+import getStarfield from "./getStarfield";
+
 // Add Scene
 export const scene = new THREE.Scene();
+
+const stars = getStarfield({ numStars: 7000 });
+scene.add(stars);
 
 // Create the Camera
 const camera = new THREE.PerspectiveCamera(
@@ -13,7 +18,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 camera.position.set(0, 10, 400);
-
 // Add Axes
 const axesHelper = new THREE.AxesHelper(3);
 scene.add(axesHelper);
@@ -41,10 +45,10 @@ scene.add(grid);
 // Appel de la fonction d'initialisation au chargement de la page
 
 // Load the Texture
-const loader = new THREE.TextureLoader();
-loader.load("assets/star.jpg", function (texture) {
-  scene.background = texture;
-});
+// const loader = new THREE.TextureLoader();
+// loader.load("assets/star.jpg", function (texture) {
+//   scene.background = texture;
+// });
 
 // Add the Sphere
 scene.add(mesh);
